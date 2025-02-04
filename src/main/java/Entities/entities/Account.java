@@ -3,7 +3,11 @@ package Entities.entities;
 
 import Entities.Exceptions.TransactionException;
 
+import java.util.logging.Logger;
+
 public class Account {
+
+    private static final Logger logger = Logger.getLogger(Account.class.getName());
 
     private int number;
     private double balance;
@@ -32,6 +36,8 @@ public class Account {
     }
 
     public synchronized void deposit(double amount) throws TransactionException {
+        logger.info("Operation performed - Deposit");
+
         if(amount <= 0){
             throw new TransactionException("Amount must be higher than zero for deposit.");
         }
@@ -39,6 +45,8 @@ public class Account {
     }
 
     public synchronized void withDraw(double amount) throws TransactionException{
+        logger.info("Operation performed - Withdraw");
+
         if(amount > balance){
             throw new TransactionException("Insufficient balance.");
         }
@@ -50,6 +58,8 @@ public class Account {
     }
 
     public synchronized void transfer(Account destinyAccount, double amount) throws TransactionException{
+        logger.info("Operation performed - transfer.");
+
         if(destinyAccount == null){
             throw new TransactionException("Destiny account cannot be null.");
         }
