@@ -49,4 +49,8 @@ public class Account {
         this.balance -= amount;
     }
 
+    public void showBalance(){
+        System.out.println("Currently balance US$: " + this.balance);
+    }
+
 }
