@@ -49,6 +49,29 @@ public class Account {
         this.balance -= amount;
     }
 
+    public synchronized void transfer(Account destinyAccount, double amount) throws TransactionException{
+        if(destinyAccount == null){
+            throw new TransactionException("Destiny account cannot be null.");
+        }
+
+        if(amount <= 0){
+            throw new TransactionException("Transfer amount must be higher than zero.");
+        }
+
+        synchronized (this){
+            synchronized (destinyAccount){
+                if(balance >= amount){
+                    this.withDraw(amount);
+                    destinyAccount.deposit(amount);
+                    System.out.println("Transfered value US$ " + amount + " from account " + this.number +
+                            " to account " + destinyAccount.getNumber() + "\n");
+                }else {
+                    throw new TransactionException("Fail to transfer. Insufficient balance.");
+                }
+            }
+        }
+    }
+
     public void showBalance(){
         System.out.println("Currently balance US$: " + this.balance);
     }
