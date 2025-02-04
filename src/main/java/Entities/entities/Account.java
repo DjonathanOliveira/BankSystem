@@ -76,4 +76,13 @@ public class Account {
         System.out.println("Currently balance US$: " + this.balance);
     }
 
+    public void showAccountInfos(){
+        System.out.println("Showing account informations...");
+        System.out.println("Account: " + String.format("%04d", this.number));
+        System.out.println("Client name: " + this.client.getName());
+        System.out.println("Client cpf: " + this.client.getCpf());
+        System.out.println("Currently balance US$: " + this.balance + "\n");
+
+    }
+
 }
