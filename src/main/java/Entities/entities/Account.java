@@ -1,6 +1,8 @@
 package Entities.entities;
 
 
+import Entities.Exceptions.TransactionException;
+
 public class Account {
 
     private int number;
@@ -21,23 +23,30 @@ public class Account {
         return number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
     public double getBalance() {
         return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
     }
 
     public Client getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public synchronized void deposit(double amount) throws TransactionException {
+        if(amount <= 0){
+            throw new TransactionException("Amount must be higher than zero for deposit.");
+        }
+        this.balance += amount;
     }
+
+    public synchronized void withDraw(double amount) throws TransactionException{
+        if(amount > balance){
+            throw new TransactionException("Insufficient balance.");
+        }
+
+        if(amount <= 0){
+            throw new TransactionException("Invalid amount.");
+        }
+        this.balance -= amount;
+    }
+
 }
