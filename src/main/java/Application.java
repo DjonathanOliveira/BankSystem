@@ -19,7 +19,7 @@ public class Application {
 
             account2.showAccountInfos();
 
-            account.transfer(account2, 25.00);
+            account.transfer(account, 25.00);
 
             account.showAccountInfos();
             account2.showAccountInfos();

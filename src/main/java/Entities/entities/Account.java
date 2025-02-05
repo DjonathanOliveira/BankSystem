@@ -68,6 +68,10 @@ public class Account {
             throw new TransactionException("Transfer amount must be higher than zero.");
         }
 
+        if(destinyAccount == this){
+            throw  new TransactionException("Destiny account cannot be the same as source account.");
+        }
+
         synchronized (this){
             synchronized (destinyAccount){
                 if(balance >= amount){
